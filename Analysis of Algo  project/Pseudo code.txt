@@ -1,0 +1,37 @@
+1. Initialize parameters: SN (number of food sources), limit, MCN (maximum cycles), n (dimensions)
+
+2. Generate initial food sources xi (i = 1 to SN) randomly within search bounds
+3. Evaluate the fitness of each food source
+4. Memorize the best solution found so far
+
+5. Repeat until termination condition (cycle < MCN):
+
+    a. Employed Bee Phase:
+        For each food source xi:
+            - Select a random food source xk (k ≠ i)
+            - Generate a new solution vi:
+                vij = xij + φij * (xij - xkj)
+            - Evaluate fitness of vi
+            - If vi is better than xi:
+                - Replace xi with vi
+                - Reset trial counter for xi
+            - Else:
+                - Increment trial counter for xi
+
+    b. Onlooker Bee Phase:
+        - Calculate selection probability pi for each xi
+        - For each onlooker bee:
+            - Select xi based on pi (roulette wheel)
+            - Generate new solution vi using same formula as above
+            - Evaluate and apply greedy selection
+            - Update trial counters
+
+    c. Scout Bee Phase:
+        For each food source xi:
+            - If trial counter > limit:
+                - Replace xi with a new random solution
+                - Reset its trial counter
+
+    d. Memorize the best solution found so far
+
+6. Output the best solution
